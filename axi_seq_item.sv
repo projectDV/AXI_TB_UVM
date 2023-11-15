@@ -38,4 +38,22 @@ class axi_seq_item extends uvm_sequence_item;
 	function new(string name="axi_seq_item")
 		super.new(name);
 	endfunction
+	
+	virtual function bit do_compare(uvm_object rhs, uvm_comparer comparer);
+		axi_seq_item pkt;
+		
+		if(!$cast(pkt,rhs))begin
+			`uvm_error("catsing failed")
+		end
+		
+		result& = super.do_compare(rhs,comparer);
+		
+		&(awaddr==pkt.awaddr)
+		&(rdata==pkt.rdata)
+		//not writing whole signals for now
+		
+		return result;
+	endfunction
+		
+		
 endclass
