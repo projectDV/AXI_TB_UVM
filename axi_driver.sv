@@ -14,7 +14,7 @@ class axi_driver extends uvm_driver#(txn);
     extern wr_data();
     extern wr_resp();
     extern rd_addr();
-    extern rd_data_resp();
+    //extern rd_data_resp();//will execute in monitor
 
     function new(string name="axi_driver", uvm_component parent);
         super.new(name,parent);
@@ -122,7 +122,7 @@ endclass
         vif.valid<=0;
       join_none
     endtask
-    task axi_driver::rd_data_resp();
+/*task axi_driver::rd_data_resp();//depricating this in driver and writing it in monitor 
       fork
         int len=vif.arlen+1;
         for(int i=0; i<len; i++)begin
@@ -137,4 +137,4 @@ endclass
           vif.rready<=0;
         end
     join_none
-    endtask
+    endtask*/
